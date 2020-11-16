@@ -10,6 +10,15 @@ class BugService {
       logger.error(error)
     }
   }
+
+  async getActiveBug(bugId) {
+    try {
+      const res = await api.get('api/bugs/' + bugId)
+      AppState.ActiveBug = res.data
+    } catch (error) {
+      logger.error(error)
+    }
+  }
 }
 
 export const bugService = new BugService()
