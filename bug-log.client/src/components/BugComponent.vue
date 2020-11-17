@@ -2,7 +2,7 @@
   <div class="col-12">
     <div v-if="bug.closed">
       <div class="bug-component col-12 my-2 text-white">
-        <div class="border border-dark rounded bg-danger row text-left mx-4">
+        <div class="border border-dark rounded bg-success row text-left mx-4">
           <h5 class=" col-3">
             {{ bug.title }}
           </h5>
@@ -21,7 +21,7 @@
     <div v-else>
       <router-link :to="{ name: 'ActiveBug', params: { bugId: bug.id } }">
         <div class="bug-component col-12 my-2 text-white">
-          <div class="border border-dark rounded bg-success grow row text-left mx-4">
+          <div class="border border-dark rounded bg-danger grow row text-left mx-4">
             <h5 class=" col-3">
               {{ bug.title }}
             </h5>
@@ -34,9 +34,9 @@
             <button class="btn btn-danger m-1 py-1 col-1" @click.prevent="closeBug()" v-if="bug.profile.email === profile.email">
               Close
             </button>
-            <div class="m-1 py-1 col-1" v-else>
-              {{ bug.createdAt.split("T")[0] }}
-            </div>
+            <p class="m-1 text-right col" v-else>
+              Created: {{ bug.createdAt.split("T")[0] }}
+            </p>
           </div>
         </div>
       </router-link>

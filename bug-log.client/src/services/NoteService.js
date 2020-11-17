@@ -37,6 +37,15 @@ class NoteService {
       logger.error(error)
     }
   }
+
+  async flagNote(bugId, noteId, flaggedNote) {
+    try {
+      await api.put('api/bugs/' + bugId + '/notes/' + noteId, flaggedNote)
+      this.getNotes(bugId)
+    } catch (error) {
+      logger.error(error)
+    }
+  }
 }
 
 export const noteService = new NoteService()

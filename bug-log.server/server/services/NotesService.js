@@ -14,9 +14,8 @@ class NotesService {
     return await dbContext.Notes.create(newNote)
   }
 
-
-  async editNote(userInfo, noteId, editedNote) {
-    const note = await dbContext.Notes.findOneAndUpdate({ profile: userInfo, _id: noteId }, editedNote)
+  async editNote(noteId, editedNote) {
+    const note = await dbContext.Notes.findOneAndUpdate({ _id: noteId }, editedNote)
     if (!note) {
       throw new BadRequest('invalid id')
     }

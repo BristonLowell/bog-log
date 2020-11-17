@@ -27,9 +27,14 @@
     <div class="col-7">
       {{ note.content }}
     </div>
-    <div class="col-2 text-right">
+    <div class="col-2 text-right" v-if="!note.flagged">
       <button :id="note.id" class="rounded btn btn-warning" @click.prevent="flagNote()">
         Flag
+      </button>
+    </div>
+    <div class="col-2 text-right" v-else>
+      <button :id="note.id" class="rounded yellow" disabled>
+        Flagged
       </button>
     </div>
   </div>
@@ -49,6 +54,10 @@ export default {
     const state = reactive({
       editedNote: {
         content: props.noteProp.content
+      },
+      flaggedNote: {
+        flagged: true,
+        profile: props.noteProp.profile
       }
     })
     const route = useRoute()
@@ -60,9 +69,7 @@ export default {
         noteService.deleteNote(route.params.bugId, props.noteProp.id)
       },
       flagNote() {
-        document.getElementById(`${props.noteProp.id}`).innerText = 'Flagged'
-        document.getElementById(`${props.noteProp.id}`).classList.add('disable')
-        document.getElementById(`${props.noteProp.id}`).classList.add('yellow')
+        noteService.flagNote(route.params.bugId, props.noteProp.id, state.flaggedNote)
       },
       editNote() {
         noteService.editNote(route.params.bugId, props.noteProp.id, state.editedNote)

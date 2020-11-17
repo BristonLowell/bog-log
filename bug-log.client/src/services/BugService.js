@@ -5,7 +5,18 @@ class BugService {
   async getBugs() {
     try {
       const res = await api.get('api/bugs')
-      AppState.bugs = res.data
+      const arr = res.data
+      const arrTwo = []
+      for (let i = 0; i < arr.length; i++) {
+        const arrItem = arr[i]
+        if (arrItem.closed === true) {
+          const newArr = arr.splice(i, 1)
+          const newObject = newArr.pop()
+          arrTwo.push(newObject)
+          i--
+        }
+      }
+      AppState.bugs = arr.concat(arrTwo)
     } catch (error) {
       logger.error(error)
     }

@@ -17,7 +17,7 @@
           </button>
         </form>
       </div>
-      <div class="col-7 text-center" v-else>
+      <div class="col-7 text-center bg-white" v-else>
         <h1 class="display-3">
           {{ bug.title }}
         </h1>
