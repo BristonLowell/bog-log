@@ -14,10 +14,30 @@ class BugService {
   async getActiveBug(bugId) {
     try {
       const res = await api.get('api/bugs/' + bugId)
-      AppState.ActiveBug = res.data
+      AppState.activeBug = res.data
     } catch (error) {
       logger.error(error)
     }
+  }
+
+  async createBug(newBug) {
+    try {
+      await api.post('api/bugs', newBug)
+      this.getBugs()
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async closeBug(bugId, closedBug) {
+    await api.put('api/bugs/' + bugId, closedBug)
+    this.getBugs()
+  }
+
+  async editBug(bugId, editedBug) {
+    console.log('hello')
+    await api.put('api/bugs/' + bugId, editedBug)
+    this.getActiveBug(bugId)
   }
 }
 

@@ -12,6 +12,7 @@ export class BugsController extends BaseController {
       .post('', this.createBug)
       .put('/:bugId', this.editBug)
   }
+
   async getAllBugs(req, res, next) {
     try {
       res.send(await bugsService.getAllBugs())
@@ -45,5 +46,4 @@ export class BugsController extends BaseController {
       next(error)
     }
   }
-
 }

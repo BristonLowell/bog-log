@@ -13,7 +13,7 @@ class BugsService {
 
   async getBugById(bugId) {
     try {
-      const bug = await dbContext.Bugs.find({ _id: bugId }).populate('profile')
+      const bug = await dbContext.Bugs.findOne({ _id: bugId }).populate('profile')
       if (!bug) {
         throw new BadRequest('invalid id')
       }
@@ -26,7 +26,6 @@ class BugsService {
   async createBug(newBug) {
     return await dbContext.Bugs.create(newBug)
   }
-
 
   async editBug(userInfo, bugId, editedBug) {
     const bug = await dbContext.Bugs.findOneAndUpdate({ profile: userInfo, _id: bugId }, editedBug)
