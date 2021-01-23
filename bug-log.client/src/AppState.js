@@ -8,3 +8,8 @@ export const AppState = reactive({
   activeBug: {},
   notes: []
 })
+
+export function clearAppState() {
+  AppState.bugs = []
+  AppState.notes = []
+}

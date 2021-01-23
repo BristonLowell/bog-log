@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { authGuard } from '@bcwdev/auth0provider-client'
+import { clearAppState } from './AppState'
 
 function loadPage(page) {
   return () => import(`./pages/${page}.vue`)
@@ -9,7 +10,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: loadPage('HomePage')
+    component: loadPage('HomePage'),
+    beforeEnter: clearAppState
   },
   {
     path: '/about',
